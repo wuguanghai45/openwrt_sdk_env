@@ -47,5 +47,7 @@ RUN wget https://github.com/wuguanghai45/openwrt_sdk_env/releases/download/v24.1
     mv /home/builder/openwrt-sdk_extract/openwrt-sdk-24.10.0-ramips-mt7621_gcc-13.3.0_musl.Linux-x86_64 /home/builder/openwrt-sdk && \
     rm -f /home/builder/sdk.tar.zst /home/builder/sdk.tar
 
+RUN chown -R builder:builder /home/builder/openwrt-sdk
+
 RUN cd /home/builder/openwrt-sdk && ./scripts/feeds update -a && ./scripts/feeds install -a
 
