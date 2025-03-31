@@ -24,6 +24,7 @@ RUN apt-get update && apt-get install -y \
     zstd \
     python3 \
     python3-pip \
+    pyhton3-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
