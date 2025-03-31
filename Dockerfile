@@ -50,5 +50,3 @@ RUN wget https://github.com/wuguanghai45/openwrt_sdk_env/releases/download/v24.1
     rm -f /home/builder/sdk.tar.zst /home/builder/sdk.tar
 
 RUN chown -R builder:builder /home/builder/openwrt-sdk
-
-
