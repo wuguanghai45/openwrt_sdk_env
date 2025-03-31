@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     gawk \
     gcc-multilib \
     g++-multilib \
+    gettext \
     git \
     libncurses5-dev \
     libssl-dev \
@@ -50,5 +51,4 @@ RUN wget https://github.com/wuguanghai45/openwrt_sdk_env/releases/download/v24.1
 
 RUN chown -R builder:builder /home/builder/openwrt-sdk
 
-RUN cd /home/builder/openwrt-sdk && ./scripts/feeds update -a && ./scripts/feeds install -a
 
