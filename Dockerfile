@@ -1,4 +1,4 @@
-FROM ubuntu:24.04
+FROM ubuntu:latest
 
 # Install required dependencies for OpenWrt SDK
 RUN apt-get update && apt-get install -y \
@@ -38,6 +38,9 @@ RUN wget https://github.com/wuguanghai45/openwrt_sdk_env/releases/download/v24.1
     mv /imagebuilder_extract/openwrt-imagebuilder-24.10.0-ramips-mt7621.Linux-x86_64 /imagebuilder && \
     rm -f /imagebuilder.tar.xz && \
     rm -rf /imagebuilder_extract
+
+RUN cd /imagebuilder && \
+    make image PROFILE="hc_wormhole" PACKAGES="openssh-sftp-server screen logrotate ip-full kmod-can-raw kmod-can-usb-gs canutils-candump usbutils dfu-util luci luci-i18n-base-zh-cn ttyd minicom ca-certificates kmod-fs-exfat exfat-mkfs -kmod-usb-storage" 
 
 # Download SDK file and extract it
 RUN wget https://github.com/wuguanghai45/openwrt_sdk_env/releases/download/v24.10.0/openwrt-sdk-24.10.0-ramips-mt7621_gcc-13.3.0_musl.Linux-x86_64.tar.zst -O /sdk.tar.zst && \
