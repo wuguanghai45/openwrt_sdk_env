@@ -40,6 +40,7 @@ RUN wget https://github.com/wuguanghai45/openwrt_sdk_env/releases/download/v24.1
     rm -rf /imagebuilder_extract
 
 RUN cd /imagebuilder && \
+    sed -i '/option check_signature/d' repositories.conf && \
     make image PROFILE="hc_wormhole" PACKAGES="openssh-sftp-server screen logrotate ip-full kmod-can-raw kmod-can-usb-gs canutils-candump usbutils dfu-util luci luci-i18n-base-zh-cn ttyd minicom ca-certificates kmod-fs-exfat exfat-mkfs -kmod-usb-storage" 
 
 # Download SDK file and extract it
