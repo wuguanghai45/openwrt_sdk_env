@@ -41,7 +41,7 @@ RUN wget https://github.com/wuguanghai45/openwrt_sdk_env/releases/download/v24.1
 
 RUN cd /imagebuilder && \
     sed -i '/option check_signature/d' repositories.conf && \
-    make image PROFILE="hc_wormhole" PACKAGES="openssh-sftp-server screen logrotate ip-full kmod-can-raw kmod-can-usb-gs canutils-candump usbutils dfu-util luci luci-i18n-base-zh-cn ttyd minicom ca-certificates kmod-fs-exfat exfat-mkfs -kmod-usb-storage" 
+    make image PROFILE="hc_wormhole"
 
 # Download SDK file and extract it
 RUN wget https://github.com/wuguanghai45/openwrt_sdk_env/releases/download/v24.10.0/openwrt-sdk-24.10.0-ramips-mt7621_gcc-13.3.0_musl.Linux-x86_64.tar.zst -O /sdk.tar.zst && \
