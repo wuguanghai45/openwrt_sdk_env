@@ -64,8 +64,6 @@ RUN wget https://downloads.openwrt.org/releases/24.10.1/targets/sunxi/cortexa7/o
     rm -f /sunxi_imagebuilder.tar.zst /sunxi_imagebuilder.tar && \
     rm -rf /sunxi_imagebuilder_extract
 
-RUN /sunxi-imagebuilder/scripts/feeds update -a
-
 # Download sunxi sdk
 RUN wget https:/downloads.openwrt.org/releases/24.10.1/targets/sunxi/cortexa7/openwrt-sdk-24.10.1-sunxi-cortexa7_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst -O /sunxi_sdk.tar.zst && \
     mkdir -p /sunxi_sdk_extract && \
@@ -74,3 +72,5 @@ RUN wget https:/downloads.openwrt.org/releases/24.10.1/targets/sunxi/cortexa7/op
     mv /sunxi_sdk_extract/openwrt-sdk-24.10.1-sunxi-cortexa7_gcc-13.3.0_musl_eabi.Linux-x86_64 /sunxi-sdk && \
     rm -f /sunxi_sdk.tar.zst /sunxi_sdk.tar && \
     rm -rf /sunxi_sdk_extract
+
+RUN /sunxi-sdk/scripts/feeds update -a
