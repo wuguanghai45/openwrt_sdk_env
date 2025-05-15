@@ -54,27 +54,23 @@ RUN wget https://github.com/wuguanghai45/openwrt_sdk_env/releases/download/v24.1
 
 RUN /openwrt-sdk/scripts/feeds update -a
 
-# Download and extract bcm27xx SDK
-RUN wget https://downloads.openwrt.org/releases/24.10.1/targets/bcm27xx/bcm2710/openwrt-sdk-24.10.1-bcm27xx-bcm2710_gcc-13.3.0_musl.Linux-x86_64.tar.zst -O /bcm27xx_sdk.tar.zst && \
-    mkdir -p /bcm27xx_sdk_extract && \
-    zstd -d /bcm27xx_sdk.tar.zst -o /bcm27xx_sdk.tar && \
-    tar xf /bcm27xx_sdk.tar -C /bcm27xx_sdk_extract && \
-    mv /bcm27xx_sdk_extract/openwrt-sdk-24.10.1-bcm27xx-bcm2710_gcc-13.3.0_musl.Linux-x86_64 /bcm27xx-sdk && \
-    rm -f /bcm27xx_sdk.tar.zst /bcm27xx_sdk.tar && \
-    rm -rf /bcm27xx_sdk_extract
 
-RUN /bcm27xx-sdk/scripts/feeds update -a
+# Download sunxi imagebuilder
+RUN wget https://downloads.openwrt.org/releases/24.10.1/targets/sunxi/cortexa7/openwrt-imagebuilder-24.10.1-sunxi-cortexa7.Linux-x86_64.tar.zst -O /sunxi_imagebuilder.tar.zst && \
+    mkdir -p /sunxi_imagebuilder_extract && \
+    zstd -d /sunxi_imagebuilder.tar.zst -o /sunxi_imagebuilder.tar && \
+    tar xf /sunxi_imagebuilder.tar -C /sunxi_imagebuilder_extract && \
+    mv /sunxi_imagebuilder_extract/openwrt-imagebuilder-24.10.1-sunxi-cortexa7.Linux-x86_64 /sunxi-imagebuilder && \
+    rm -f /sunxi_imagebuilder.tar.zst /sunxi_imagebuilder.tar && \
+    rm -rf /sunxi_imagebuilder_extract
 
-# Download and extract bcm27xx imagebuilder
-RUN wget https://downloads.openwrt.org/releases/24.10.1/targets/bcm27xx/bcm2710/openwrt-imagebuilder-24.10.1-bcm27xx-bcm2710.Linux-x86_64.tar.zst -O /bcm27xx_imagebuilder.tar.zst && \
-    mkdir -p /bcm27xx_imagebuilder_extract && \
-    zstd -d /bcm27xx_imagebuilder.tar.zst -o /bcm27xx_imagebuilder.tar && \
-    tar xf /bcm27xx_imagebuilder.tar -C /bcm27xx_imagebuilder_extract && \
-    mv /bcm27xx_imagebuilder_extract/openwrt-imagebuilder-24.10.1-bcm27xx-bcm2710.Linux-x86_64 /bcm27xx-imagebuilder && \
-    rm -f /bcm27xx_imagebuilder.tar.zst /bcm27xx_imagebuilder.tar && \
-    rm -rf /bcm27xx_imagebuilder_extract
+RUN /sunxi-imagebuilder/scripts/feeds update -a
 
-RUN cd /bcm27xx-imagebuilder && \
-    sed -i '/option check_signature/d' repositories.conf && \
-    make image PROFILE="rpi-3"
-
+# Download sunxi sdk
+RUN wget https:/downloads.openwrt.org/releases/24.10.1/targets/sunxi/cortexa7/openwrt-sdk-24.10.1-sunxi-cortexa7_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst -O /sunxi_sdk.tar.zst && \
+    mkdir -p /sunxi_sdk_extract && \
+    zstd -d /sunxi_sdk.tar.zst -o /sunxi_sdk.tar && \
+    tar xf /sunxi_sdk.tar -C /sunxi_sdk_extract && \
+    mv /sunxi_sdk_extract/openwrt-sdk-24.10.1-sunxi-cortexa7_gcc-13.3.0_musl_eabi.Linux-x86_64 /sunxi-sdk && \
+    rm -f /sunxi_sdk.tar.zst /sunxi_sdk.tar && \
+    rm -rf /sunxi_sdk_extract
